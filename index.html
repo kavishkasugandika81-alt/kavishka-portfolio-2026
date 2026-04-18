@@ -252,6 +252,104 @@ nav{
   .nav-links.open{display:flex}
 }
 
+/* ===== FEATURED VIDEO SECTION ===== */
+.featured-section{
+  padding:0 80px 80px;
+  max-width:1400px;
+  margin:0 auto;
+}
+.featured-header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:24px;
+}
+.featured-badge{
+  font-family:'Inconsolata',monospace;
+  font-size:11px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--gold);
+  border:1px solid rgba(201,168,76,0.4);
+  padding:4px 14px;
+  display:inline-block;
+}
+.featured-title{
+  font-family:'Syne',sans-serif;
+  font-size:24px;
+  font-weight:800;
+  color:var(--cream);
+  letter-spacing:0.02em;
+  text-transform:uppercase;
+}
+.featured-video-container{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#000;
+  border:1px solid var(--line2);
+  overflow:hidden;
+  border-radius:4px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+.featured-video-container iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+/* Thumbnail fallback (hidden by default, shown if embed fails) */
+.video-thumb-fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  display: none;
+}
+#featuredVideoContainer:hover #featuredPlayOverlay {
+  background: rgba(0,0,0,0.4) !important;
+}
+#featuredVideoContainer:hover #featuredPlayOverlay > div {
+  background: var(--gold) !important;
+  border-color: var(--gold) !important;
+  transform: scale(1.1);
+}
+#featuredVideoContainer:hover #featuredPlayOverlay > div > div {
+  border-color: transparent transparent transparent var(--bg) !important;
+}
+.featured-meta{
+  margin-top:16px;
+  display:flex;
+  justify-content:flex-start;
+}
+.featured-caption{
+  margin-top:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+.featured-desc{
+  font-size:15px;
+  color:var(--muted2);
+  line-height:1.7;
+  max-width:700px;
+  font-style:italic;
+}
+.featured-desc strong{
+  color:var(--gold);
+  font-weight:600;
+  font-style:normal;
+}
+.featured-credit{
+  font-family:'Inconsolata',monospace;
+  font-size:10px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
 /* ===== SECTION WRAPPER ===== */
 .section{
   padding:120px 80px;
@@ -834,6 +932,8 @@ footer{
   nav{padding:20px 24px}
   .hero-content{padding:100px 24px 40px}
   .hero-stats-row{padding:32px 24px;flex-wrap:wrap;gap:20px}
+  .featured-section{padding:0 24px 60px}
+  .featured-caption{flex-direction:column;gap:12px}
   .section{padding:80px 24px}
   .video-duo, .projects-grid, .reels-row {grid-template-columns:1fr}
   .docu-featured{grid-template-columns:1fr}
@@ -896,6 +996,30 @@ footer{
   <div class="hero-scroll">Scroll</div>
 </div>
 
+<!-- ===== FEATURED VIDEO (GOOGLE DRIVE EMBED + THUMBNAIL FALLBACK) ===== -->
+<div class="featured-section reveal">
+  <div class="featured-header">
+    <span class="featured-title">Cinematic Post-Production, Accelerated by AI</span>
+  </div>
+  <div class="featured-video-container" id="featuredVideoContainer" onclick="openVid('https://drive.google.com/file/d/1bSYxhvweVs5riR6XY0InXfHOH4Nv9kO7/preview', true)" style="cursor:pointer;">
+    <img src="https://i.ibb.co/mC41Vg27/Screenshot-2026-04-18-233310.png" alt="Cinematic Post-Production, Accelerated by AI" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.25);transition:background 0.3s;" id="featuredPlayOverlay">
+      <div style="width:80px;height:80px;border:2px solid rgba(255,255,255,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);background:rgba(0,0,0,0.35);transition:all 0.3s;">
+        <div style="width:0;height:0;border-style:solid;border-width:14px 0 14px 24px;border-color:transparent transparent transparent white;margin-left:5px;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="featured-meta">
+    <span class="featured-badge">✦ KLING 3.0 + HERA</span>
+  </div>
+  <div class="featured-caption">
+    <p class="featured-desc">
+      <strong>Cinematic quality. AI speed. One editor.</strong> Entirely generated with Kling 3.0 and Hera AI.
+    </p>
+    <span class="featured-credit">AI-First Production · 2026</span>
+  </div>
+</div>
+
 <!-- ===== SECTION 01 · AI MOTION DESIGN ===== -->
 <div class="section reveal" id="motion">
   <div class="section-label"><span class="section-num">01</span><div class="section-line"></div><span class="section-title">AI Motion Design</span></div>
@@ -949,7 +1073,7 @@ footer{
   </div>
 </div>
 
-<!-- ===== SECTION 02 · UGC & BRAND ADS (SPACEGOODS THUMBNAIL UPDATED) ===== -->
+<!-- ===== SECTION 02 · UGC & BRAND ADS ===== -->
 <div class="section reveal" id="ads">
   <div class="section-label"><span class="section-num">02</span><div class="section-line"></div><span class="section-title">UGC & Brand Ads</span></div>
   <h2 class="section-h">Performance<br><em>by design</em></h2>
@@ -968,7 +1092,7 @@ footer{
         <div class="video-desc">DIRECT RESPONSE · TIKTOK · META</div>
       </div>
     </div>
-    <!-- Spacegoods (NEW THUMBNAIL) -->
+    <!-- Spacegoods -->
     <div class="proj video-card" role="button" tabindex="0" onclick="openVid('https://drive.google.com/file/d/19E4tXRQjILx9bsqsE2E2BvqmUFjRnbzH/preview', false)" onkeydown="if(event.key==='Enter'||event.key===' ') this.click()">
       <div class="proj-thumb video-thumb"><img src="https://i.ibb.co/V0NnMKkC/Screenshot-2025-10-15-143253.png" alt="Spacegoods Performance Ad" loading="lazy"></div>
       <div class="proj-overlay video-overlay"><div class="play-btn"></div></div>
@@ -1209,6 +1333,26 @@ footer{
     if(e.target === document.getElementById('vidModal')) closeVidBtn();
   };
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeVidBtn(); });
+
+  // Fallback: if Google Drive embed fails to load, show thumbnail that opens modal
+  const iframe = document.getElementById('featuredVideoIframe');
+  const fallback = document.getElementById('videoThumbFallback');
+  iframe.addEventListener('error', function() {
+    iframe.style.display = 'none';
+    fallback.style.display = 'block';
+  });
+  // Also check after a few seconds in case error event doesn't fire
+  setTimeout(() => {
+    // If iframe content is blank or about:blank, show fallback
+    try {
+      if (iframe.contentDocument && iframe.contentDocument.body.innerHTML === '') {
+        iframe.style.display = 'none';
+        fallback.style.display = 'block';
+      }
+    } catch(e) {
+      // Cross-origin, can't check; rely on error event
+    }
+  }, 3000);
 })();
 </script>
 </body>
